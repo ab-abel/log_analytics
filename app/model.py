@@ -1,7 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 
 from flask_login import UserMixin
-
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField, EmailField
+from wtforms.validators import DataRequired, Email, Length
 
 db = SQLAlchemy()
 
@@ -33,3 +35,8 @@ class User(db.Model, UserMixin):
    
     def get_id(self):
         return str(self.id)
+
+class LoginForm(FlaskForm):
+    email = EmailField('Email', validators=[DataRequired(), Email(), Length(min=4, max=80)])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=4, max=120)])
+    submit = SubmitField('Login')
