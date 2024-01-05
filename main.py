@@ -14,6 +14,9 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 def home():
     return render_template('auth/login.html')
 
+@app.route('/register')
+def register():
+    return render_template('auth/register.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
