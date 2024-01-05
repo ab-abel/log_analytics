@@ -13,8 +13,8 @@ List the key features and functionalities of your log analytics setup.
 - Optional: Machine Learning Integration
 
 ## Getting Started
-  ### prototype
-    ![log analytics dashboard](image.png)
+### prototype
+![log analytics dashboard](image.png)
 
 ### Prerequisites
 
