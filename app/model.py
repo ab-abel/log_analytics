@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, EmailField
-from wtforms.validators import DataRequired, Email, Length
+from wtforms.validators import DataRequired, Email, Length, InputRequired, EqualTo
 
 db = SQLAlchemy()
 
@@ -39,4 +39,12 @@ class User(db.Model, UserMixin):
 class LoginForm(FlaskForm):
     email = EmailField('Email', validators=[DataRequired(), Email(), Length(min=4, max=80)])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=4, max=120)])
+    submit = SubmitField('Login')
+    
+class RegisterForm(FlaskForm):
+    firstname = StringField('Firstname', validators=[InputRequired()])
+    lastname = StringField('Lastname', validators=[InputRequired()])
+    email = EmailField('Email', validators=[DataRequired(), Email(), Length(min=4, max=80)])
+    password = PasswordField('Password', [InputRequired(), EqualTo('confirm', message='Passwords must match')])
+    confirm = PasswordField('Confirm Password', [InputRequired()])
     submit = SubmitField('Login')
