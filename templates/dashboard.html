@@ -1,0 +1,139 @@
+{% extends 'auth/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block main %}
+    <div class="content-start transition  "> 
+        <div class="container-fluid dashboard">
+        <div class="content-header">
+            <div class="d-flex justify-content-end">
+            <div class="col-md-3">
+                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <option selected>Select Events by Category</option>
+                <option value="1">Application</option>
+                <option value="2">Security</option>
+                <option value="3">System</option>
+                <option value="4">Setup</option>
+                <option value="5">Active Directory</option>
+                <option value="6">DNS Server</option>
+                </select>
+            </div>
+            </div>
+            
+            <h1>Events Summary</h1>
+            <p>Events Viewer for Admin</p>
+        </div>
+                
+        <div class="row">
+            <div class="col-md-7">
+            <div class="card">
+                <div class="card-header">
+                <h4>Daily Logins</h4>
+                </div>
+                <div class="card-body">
+                <div id="line"></div>
+                </div>
+            </div>
+            </div>
+            <div class="col-md-5">
+            <div class="card">
+                <div class="card-header">
+                <h4>Login Counts</h4>
+                </div>
+                <div class="card-body">
+                <div id="login"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+        <div> <br> </div>
+
+        <div class="row">
+            <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                <h4>Events By Category</h4>
+                </div>
+                <div class="card-body">
+                <div id="area"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-7">
+            <div class="card">
+                <div class="card-header">
+                <h4>Top Events</h4>
+                </div>
+                <div class="card-body">
+                <div id="chart"></div>
+                </div>
+            </div>
+            </div>
+            <div class="col-md-5">
+            <div class="card">
+                <div class="card-header">
+                <h4>Events Counts</h4>
+                </div>
+                <div class="card-body">
+                <div id="radialGradient"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+            <div class="card-header">
+                <h4>Most Recents Events</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-light">
+                <thead class="thead-dark">
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    </tr>
+                </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+        <br>
+        </div>
+        
+
+    </div><!-- End Container-->
+{%endblock%}
