@@ -14,8 +14,7 @@ List the key features and functionalities of your log analytics setup.
 
 ## Getting Started
   ### prototype
-    -![Alt text](image.png)
-
+    ![log analytics dashboard](image.png)
 
 ### Prerequisites
 
