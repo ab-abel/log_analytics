@@ -2,6 +2,7 @@ from flask import Flask, render_template, session,request, flash, redirect, url_
 import os
 
 from app.model import LoginForm, RegisterForm, User, db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # dotenv loader
 from dotenv import load_dotenv
@@ -30,14 +31,16 @@ def register():
     if form.validate_on_submit():
         firstname = request.form.get('firstname')
         lastname = request.form.get('lastname')
-        password = request.form.get('password') 
+        password = generate_password_hash(request.form.get('password'))
         email = request.form.get('email')
+        
         existing_email = User.query.filter(
             User.email.like('%' + email + '%')).first()
         if existing_email:
             flash (
                 'this user email is already registered', 'warning'
             )
+            return render_template('auth/register.html', form=form)
         user = User(
             firstname=firstname,
             lastname=lastname,
@@ -58,4 +61,8 @@ def dashboard():
     return render_template('dashboard.html')
 
 if __name__ == '__main__':
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
+        # db.drop_all()
     app.run(debug=True)
