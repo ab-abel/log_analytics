@@ -35,8 +35,11 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
+    if current_user.is_authenticated or not current_user.is_anonymous:
+        return redirect(url_for('dashboard'))
     
+    
+    form = LoginForm()
     if form.validate_on_submit():
         email = request.form.get('email')
         password = request.form.get('password')
