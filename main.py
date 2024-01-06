@@ -33,7 +33,7 @@ def user_loader(user_id):
 def home():
     return render_template('auth/login.html')
 
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     
