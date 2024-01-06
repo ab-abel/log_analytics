@@ -36,6 +36,7 @@ def home():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated or not current_user.is_anonymous:
+        flash('You are already logged in', 'info')
         return redirect(url_for('dashboard'))
     
     
@@ -59,10 +60,10 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if session.get('username'):
+    if current_user.is_authenticated or not current_user.is_anonymous:
         flash('You are already logged in', 'info')
-        return redirect(url_for('login'))
-    
+        return redirect(url_for('dashboard'))
+
     form = RegisterForm()
     if form.validate_on_submit():
         firstname = request.form.get('firstname')
@@ -94,7 +95,8 @@ def register():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html')
+    # print(current_user.firstname)
+    return render_template('dashboard.html',user=current_user)
 
 if __name__ == '__main__':
     db.init_app(app)
