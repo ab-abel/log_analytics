@@ -5,10 +5,12 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, EmailField
 from wtforms.validators import DataRequired, Email, Length, InputRequired, EqualTo
 
+import email_validator
+
 db = SQLAlchemy()
 
 
-class User(db.Model, UserMixin):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(20), unique=True, nullable=False)
     lastname = db.Column(db.String(20), unique=True, nullable=False)
@@ -47,4 +49,4 @@ class RegisterForm(FlaskForm):
     email = EmailField('Email', validators=[DataRequired(), Email(), Length(min=4, max=80)])
     password = PasswordField('Password', [InputRequired(), EqualTo('confirm', message='Passwords must match')])
     confirm = PasswordField('Confirm Password', [InputRequired()])
-    submit = SubmitField('Register')
+    # submit = SubmitField('Register')
