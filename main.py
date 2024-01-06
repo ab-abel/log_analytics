@@ -98,6 +98,12 @@ def dashboard():
     # print(current_user.firstname)
     return render_template('dashboard.html',user=current_user)
 
+@app.route('/logout', methods=['GET'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
 if __name__ == '__main__':
     db.init_app(app)
     with app.app_context():
