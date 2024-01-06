@@ -44,7 +44,7 @@ def login():
         user_exist = User.query.filter_by(email=email).first()
         if not (user_exist and check_password_hash(pwhash=user_exist.password, password=password)):
             flash('Invalid email or password. Please try again.', 'danger')
-            return render_template('login.html', form=form)
+            return render_template('auth/login.html', form=form)
         
         db.session.add(user_exist) 
         db.session.commit()
