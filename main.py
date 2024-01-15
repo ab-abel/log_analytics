@@ -16,11 +16,11 @@ app = Flask(os.getenv('APP_NAME'))
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
-
 # login manager
 login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
+
 
 @login_manager.user_loader
 def user_loader(user_id):
@@ -29,17 +29,16 @@ def user_loader(user_id):
     """
     return User.query.get(user_id)
 
-@app.route('/')
-def home():
-    return render_template('auth/login.html')
+# @app.route('/')
+# def hologinme():
+#     return render_template('auth/login.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated or not current_user.is_anonymous:
         flash('You are already logged in', 'info')
         return redirect(url_for('dashboard'))
-    
-    
+
     form = LoginForm()
     if form.validate_on_submit():
         email = request.form.get('email')
@@ -49,13 +48,13 @@ def login():
         if not (user_exist and check_password_hash(pwhash=user_exist.password, password=password)):
             flash('Invalid email or password. Please try again.', 'danger')
             return render_template('auth/login.html', form=form)
-        
+
         db.session.add(user_exist) 
         db.session.commit()
         login_user(user_exist, remember=True)
         flash('Login successfull', 'success')
         return redirect(url_for('dashboard'))
-    
+
     return render_template('auth/login.html', form=form)
 
 @app.route('/register', methods=['GET', 'POST'])
