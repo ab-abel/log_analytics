@@ -33,3 +33,7 @@ return $todayEvents
 
 # $greeting =  "Hello"
 # return $greeting
+
+
+#get last bootup time 
+# Get-CimInstance -ClassName win32_operatingsystem | select csname, lastbootuptime
