@@ -37,3 +37,6 @@ return $todayEvents
 
 #get last bootup time 
 # Get-CimInstance -ClassName win32_operatingsystem | select csname, lastbootuptime
+
+#open poweshelll with admin doings 
+# powershell start-process powershell -verb runas
