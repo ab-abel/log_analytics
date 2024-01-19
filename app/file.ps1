@@ -1,5 +1,7 @@
 # Get log from the machine
 
+# powershell start-process powershell -verb runas
+
 #***************** Get all avalable log entries ****************
 # use the * wildcard
 # Get-EventLog -LogName *
@@ -13,13 +15,20 @@ $Begin = Get-Date -format "MM/dd/yyyy 00:00:00"
 # $End = Get-Date -Date '1/8/2023 17:00:00'
 # $todayEvents = Get-EventLog -LogName  $args[0] -After $start -Before $End
 
-$eventName = $args[0]
+# $eventName = $args[0]
+$eventName = 'Security'
 
-$todayEvents =  Get-EventLog -LogName $eventName -After $Begin -Before $End | ConvertTo-Json
+# $todayEvents =  Get-EventLog -LogName $eventName -After $Begin -Before $End | ConvertTo-Json
 
-return $todayEvents
+# return $todayEvents
 
-#**************** output path ***************
+if ($eventName -eq 'Secutiry'){
+  powershell start-process powershell -verb runas
+  $todayEvents =  Get-EventLog -LogName $eventName -After $Begin -Before $End | ConvertTo-Json
+
+  return $todayEvents
+}
+#**************** output path *************
 # $appLogsCsvPath = "C:\Users\hp\Desktop\Abel\ALx\simple_flask_auth\appLogs.json"
 
 #********* convert results to json *************
