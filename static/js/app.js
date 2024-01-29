@@ -1,0 +1,1 @@
+console.log('the Js is added to the page')
