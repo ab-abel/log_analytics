@@ -15,19 +15,19 @@ $Begin = Get-Date -format "MM/dd/yyyy 00:00:00"
 # $End = Get-Date -Date '1/8/2023 17:00:00'
 # $todayEvents = Get-EventLog -LogName  $args[0] -After $start -Before $End
 
-# $eventName = $args[0]
-$eventName = 'Security'
+$eventName = $args[0]
+# $eventName = 'Security'
 
+$todayEvents =  Get-EventLog -LogName $eventName -After $Begin -Before $End | ConvertTo-Json
+
+return $todayEvents
+
+# if ($eventName -eq 'Security'){
+# powershell start-process powershell -verb runas
 # $todayEvents =  Get-EventLog -LogName $eventName -After $Begin -Before $End | ConvertTo-Json
 
 # return $todayEvents
-
-if ($eventName -eq 'Secutiry'){
-  powershell start-process powershell -verb runas
-  $todayEvents =  Get-EventLog -LogName $eventName -After $Begin -Before $End | ConvertTo-Json
-
-  return $todayEvents
-}
+# }
 #**************** output path *************
 # $appLogsCsvPath = "C:\Users\hp\Desktop\Abel\ALx\simple_flask_auth\appLogs.json"
 
@@ -49,3 +49,24 @@ if ($eventName -eq 'Secutiry'){
 
 #open poweshelll with admin doings 
 # powershell start-process powershell -verb runas
+
+
+# Filter for logon events in the Security log
+# $logonEvents = Get-WinEvent -LogName Security -FilterXPath "*[System[EventID=4624 or EventID=4625]]" -MaxEvents 50
+
+# Display the relevant information for each logon event
+# foreach ($event in $logonEvents) {
+#     $time = $event.TimeCreated
+#     $userName = $event.Properties[5].Value
+#     $logonType = $event.Properties[8].Value
+#     $logonStatus = $event.Properties[10].Value
+
+#     Write-Host "Time: $time - User: $userName - Logon Type: $logonType - Logon Status: $logonStatus"
+# }
+# return $time
+
+
+# run script on admin mode using start process
+
+# $out = Start-Process powershell  -Verb RunAs
+# $out>>'hello'
